@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+  {% block content %}
+      <div class="row">
+        <div class="col-md-4">
+          <div class="treasure panel panel-default">
+            <div class="panel-heading">
+              <h2 class-"panel-title"> {{ treasure.name }}</h2>
+            </div>
+            {% if treasure.img_url %}
+              <img src="{{ treasure.img_url }}" alt="treasure image" height="200"/>
+            {% else %}
+              <img src="{{ treasure.image.url }}" alt="uploaded image" height="200"/>
+            {% endif %}
+              <p> {{ treasure.value }} </p>
+              <p> {{ treasure.location }} </p>
+            </div>
+          </div>
+        </div>
+  {% endblock %}

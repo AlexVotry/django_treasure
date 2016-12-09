@@ -1,0 +1,60 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Treasuregram</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top text-center">
+      <a href="/">
+        <img class="finger" src="{% static 'images/finger2.png' %}" alt="finger">
+      </a>
+    </nav>
+    <main class="container" role="main">
+      <h1 class="glyphicon glyphicon-asterisk">Treasuregram</h1>
+
+      <div class="treasure panel panel-default">
+        {% for treasure in treasures %}
+        <div class="panel-heading">
+          <h2 class-"panel-title"> {{ treasure.name }} : </h2>
+        </div>
+
+        <div class="panel-body">
+          <table class="treasure-table">
+            <tr>
+              <th class="glyphicon glyphicon-globe">
+                <strong>Material:  </strong>
+              </th>
+              <td>   {{ treasure.material }} </td>
+            </tr>
+            <tr>
+              <th class="glyphicon glyphicon-usd">
+                <strong>Value:  </strong>
+              </th>
+              <td> {% if treasure.value > 0 %}
+                    {{ treasure.value }}
+                    {% else %}
+                    Unknown
+                    {% endif %}
+              </td>
+            </tr>
+
+            <tr>
+              <th class="glyphicon glyphicon-road">
+                <strong>Location:  </strong>
+              </th>
+              <td> {{ treasure.location }} </td>
+            </tr>
+
+          </table>
+        </div>
+        {% endfor %}
+      </div>
+
+    </main>
+  </body>
+</html>

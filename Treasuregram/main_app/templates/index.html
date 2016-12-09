@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+      <div class="row">
+      {% for treasure in treasures %}
+        <div class="col-md-4">
+          <div class="treasure panel panel-default">
+
+            <div class="index-heading panel-heading ">
+              <a class-"panel-title text-left" href="/{{ treasure.id }}/">
+                <span class="treasure_name">{{ treasure.name }}</span>
+              </a>
+              <button type="button" id="likes" data-id="{{ treasure.id }}" class="btn btn-mini btn-danger glyphicon glyphicon-heart pull-right">
+                {% if treasure.likes > 0 %} {{ treasure.likes }} {% endif %}
+              </button>
+              <div class="row">
+                <a class="panel-username col-md-offset-2" href="/user/{{ treasure.user.username }}">
+                by: {{ treasure.user.username }}</a>
+              </div>
+            </div>
+
+            <a href="/{{ treasure.id }}/">
+              <div class="panel-body">
+                {% if treasure.img_url %}
+                <img src="{{ treasure.img_url }}" height="100" alt="url">
+                {% else %}
+                <img src="{{ treasure.image.url }}" height="100" alt="uploaded image">
+                {% endif %}
+
+              </div>
+            </a>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
+          </div><div class = "row">
+        {% endif %}
+        {% endfor %}
+      </div>
+
+      <div class="treasure panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add Treasure</h3>
+        </div>
+
+        <div class="panel-body">
+          <form enctyp="multipart/form-data" action="post_url/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+      </div>
+
+{% endblock %}
